@@ -31,7 +31,7 @@ Example HTML snippet for fetching customer data:
     <button type="submit">Get Customer</button>
 </form>
 <div id="customerContent"></div>
-```html
+html```
 
 Step 3: Integrate HTMX for Dynamic Interaction
 Include HTMX scripts to manage asynchronous requests without needing to refresh the page. HTMX will help in dynamically loading and submitting data to the server.
