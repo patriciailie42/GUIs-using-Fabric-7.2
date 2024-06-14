@@ -25,6 +25,7 @@ Form inputs for customer ID, SSN, first name, and last name.
 HTMX attributes to bind forms with Fabric web services.
 
 Example HTML snippet for fetching customer data:
+```html
 <form id="getCustomer" hx-get="http://localhost:3213/api/customer/{customerId}" hx-ext="path-params" hx-target="#customerContent">
     <input type="text" id="customerId" name="customerId" required>
     <button type="submit">Get Customer</button>
