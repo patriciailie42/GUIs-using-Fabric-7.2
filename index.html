@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTMX API Handling</title>
+    <link rel="stylesheet" href="../k2.css">
+    <!-- Include HTMX -->
+    <script src="https://unpkg.com/htmx.org"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/path-params.js"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+
+</head>
+
+<body>
+    <h1>Customer Data Management</h1>
+
+    <!-- Section for fetching customer data -->
+    <form id="getCustomer"
+          hx-get="http://localhost:3213/api/customer/{customerId}"
+          hx-ext="path-params"
+          hx-target="#getcustomercontent"
+          hx-swap="innerHTML"
+          hx-headers='{"Accept": "application/xml"}'>
+        <label for="customerId">Enter ID:</label>
+        <input type="text" id="customerId" name="customerId" required>
+        <button type="submit">Get Customer</button>
+    </form>
+
+    <div id="getcustomercontent">
+        <p>Content will load here after you click 'Get Customer'.</p>
+    </div>
+
+    <!-- Form for updating customer data -->
+    <h2>Update Customer Data</h2>
+    <form id="updateForm"
+          hx-put="http://localhost:3213/api/customer/{customerId}"
+          hx-ext="path-params,json-enc"
+          hx-target="#updateResponse"
+          hx-swap="innerHTML"
+          hx-trigger="submit"
+          hx-encode="true">
+        <label for="updateCustomerId">Customer ID:</label>
+        <input type="text" id="updateCustomerId" name="customerId" required><br>
+        <label for="ssn">SSN:</label>
+        <input type="text" id="ssn" name="ssn" required><br>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required><br>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required><br>
+        <button type="submit">Update Customer</button>
+    </form>
+
+    <div id="updateResponse">
+        <p>Response will load here after you click 'Update Customer'.</p>
+    </div>
+
+    <!--
+    <script>
+       document.addEventListener("DOMContentLoaded", function() {
+    var form = document.getElementById('updateForm');
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent the default form submission to handle it here
+
+        var customerId = document.getElementById('customerId').value;
+        if (!customerId) {
+            alert("Customer ID is required");
+            return; // Stop the function if no customer ID
+        }
+
+        var actionUrl = 'http://localhost:3213/api/customer/update/' + encodeURIComponent(customerId);
+        console.log("Action URL:", actionUrl); // Debug: Check what URL is being set
+
+        // Correctly configure HTMX for dynamic URL submission
+        form.setAttribute('action', actionUrl); // Update the form action
+        form.setAttribute('hx-post', actionUrl); // Ensure HTMX knows the new action URL
+
+        // Trigger the HTMX request explicitly if necessary
+        htmx.trigger(form, 'submit', {target: form});
+    });
+});
+
+        </script>
+    -->
+        
+
+    <!-- Section for deleting customer data -->
+    <h2>Delete Customer Data</h2>
+    <label for="deleteIdInput">Enter ID for Deletion:</label>
+    <input type="text" id="deleteIdInput" name="deleteIdInput">
+    <button hx-delete="http://localhost:3213/api/customer/{customerId}"
+            hx-ext="path-params"
+            hx-target="#deleteResponse"
+            hx-swap="innerHTML"
+            hx-trigger="click"
+            hx-vals='javascript:{"customerId": document.getElementById("deleteIdInput").value}'>
+        Click to Delete Customer
+    </button>
+    <div id="deleteResponse" style="display: block; margin-top: 10px;">
+        <p>Response will load here after you click 'Click to Delete Customer'.</p>
+    </div>
+
+
+    <h2>Insert New Customer</h2>
+    <form id="insertForm"
+          hx-post="http://localhost:3213/api/customer/{customerId}"  
+          hx-ext="path-params,json-enc"  
+          hx-target="#insertResponse"
+          hx-swap="innerHTML"
+          hx-trigger="submit"
+          hx-encode="true">
+          <label for="updateCustomerId">Customer ID:</label>
+          <input type="text" id="updateCustomerId" name="customerId" required><br>
+          <label for="ssn">SSN:</label>
+          <input type="text" id="ssn" name="ssn" required><br>
+          <label for="first_name">First Name:</label>
+          <input type="text" id="first_name" name="first_name" required><br>
+          <label for="last_name">Last Name:</label>
+          <input type="text" id="last_name" name="last_name" required><br>
+          <button type="submit">Insert Customer</button>
+      </form>
+    </form>
+
+    <div id="insertResponse">
+        <p>Response will load here after you click 'Insert Customer'.</p>
+    </div>
+
+</body>
+</html>
