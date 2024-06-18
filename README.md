@@ -35,11 +35,15 @@ Example HTML snippet for fetching customer data:
 
 Step 3: Integrate HTMX for Dynamic Interaction
 Include HTMX scripts to manage asynchronous requests without needing to refresh the page. HTMX will help in dynamically loading and submitting data to the server.
+```html
 <script src="https://unpkg.com/htmx.org"></script>
+```
 
 Step 4: Styling
 Apply CSS for basic styling. You can use Fabric's default stylesheet or your custom CSS.
+```html
 <link rel="stylesheet" href="../styles/k2.css">
+```
 
 Step 5: Test Your Application
 Ensure all operations (GET, PUT, DELETE) work as expected:
@@ -75,11 +79,13 @@ Your application should be ready with basic functionality and UI elements styled
 
 Step 4: Integrating the Application
 Update apps.json: Add your application's details to the apps.json file in the Fabric installation directory under K2View\Fabric_[version]\Server\fabric\staticWeb. Example entry:
+```json
 {
   "name": "My Simple Web App",
   "appId": "myApp",
   "hidden": false
 }
+```
 Deploy Application Code: Place your application code in a new folder named after the appId within the same directory.
 
 Step 5: Finalizing Integration
